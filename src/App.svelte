@@ -1,8 +1,8 @@
 <script lang="ts">
   import Titulo from "./components/Titulo.svelte";
-
+  let valorInput = ""
   function submeter() {
-
+	console.log(valorInput)
 	console.log('OLá')
   }
 
@@ -14,9 +14,9 @@
 
 			<div class="busca-usuario">
 				<form on:submit|preventDefault={submeter} >
-					<input type="text" class="input">
+					<input type="text" class="input" bind:value={valorInput}>
 					<div class="botao-container">
-						<button type="submit"  class="botao">Buscar</button>
+						<button type="submit"  class="botao" >Buscar</button>
 					</div>
 				</form>
 			</div>
