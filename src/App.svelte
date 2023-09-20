@@ -1,10 +1,14 @@
 <script lang="ts">
 	export let name: string;
+	let descricao = 'Minha primeira página svelt'
+	let src = 'https://th.bing.com/th/id/OIP.N9-nzQjIC9UPchR7cHm0LwHaGh?pid=ImgDet&rs=1'
+	let alt = 'Imagem kaido das 100 feras'
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<p>{descricao}</p>
+	<img src={src} alt={alt}>
 </main>
 
 <style>
