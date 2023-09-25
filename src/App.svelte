@@ -7,8 +7,8 @@ import Titulo from "./components/Titulo.svelte";
 
   let usuario: IUsuario  | null = null;
   function definirUsuario(event: CustomEvent<IUsuario>) {
-  console.log(usuario)
-  usuario = event.detail
+    usuario = event.detail
+    console.log(usuario)
   }
 
   /*let usuario: IUsuario = {

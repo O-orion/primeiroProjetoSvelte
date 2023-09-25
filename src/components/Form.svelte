@@ -2,6 +2,9 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import type IUsuario from "../interfaces/IUsuario";
+  import { buscaRepositorio, buscarUsuario } from "../requisicoes";
+  import montarUsuario from "../utils/montarUsuario";
+
 
     const dispatch = createEventDispatcher<{alterarUsuario: IUsuario}>()
     let valorInput = "";
@@ -9,27 +12,27 @@
     let statusDeErro: null | number = null
 
     async function submeter() {
-        const respostaUsuario = await fetch(`https://api.github.com/users/${valorInput}`);
-        if(respostaUsuario.ok) {
+
+        const respostaUsuario = await buscarUsuario(valorInput)
+        const respostaRepositorios = await buscaRepositorio(valorInput)
+
+        if(respostaUsuario.ok && respostaRepositorios.ok) {
+   
             statusDeErro = respostaUsuario.status
+
             const dadosUser = await respostaUsuario.json() // transformando resposta em um json.
             // Dispera um evento, contem as informações do segundo parâmetro.
-            dispatch('alterarUsuario', {
-            avatar_url: dadosUser.avatar_url,
-            login: dadosUser.login,
-            nome: dadosUser.name,
-            perfil_url: dadosUser.html_url,
-            repositorios_publicos: dadosUser.public_repos,
-            seguidores: dadosUser.followers,
-            }
-            )
+            const dadosRepo = await respostaRepositorios.json()
+
+            dispatch('alterarUsuario', montarUsuario(dadosUser, dadosRepo))
 
         } else {
             statusDeErro = respostaUsuario.status
         }
 
-       
-  }
+    }
+
+
 </script>
 
 
