@@ -5,30 +5,40 @@
 
     const dispatch = createEventDispatcher<{alterarUsuario: IUsuario}>()
     let valorInput = "";
-   // export let usuario: IUsuario | null
+    // export let usuario: IUsuario | null
+    let statusDeErro: null | number = null
 
     async function submeter() {
-        
         const respostaUsuario = await fetch(`https://api.github.com/users/${valorInput}`);
-        const dadosUser = await respostaUsuario.json() // transformando resposta em um json.
+        if(respostaUsuario.ok) {
+            statusDeErro = respostaUsuario.status
+            const dadosUser = await respostaUsuario.json() // transformando resposta em um json.
+            // Dispera um evento, contem as informações do segundo parâmetro.
+            dispatch('alterarUsuario', {
+            avatar_url: dadosUser.avatar_url,
+            login: dadosUser.login,
+            nome: dadosUser.name,
+            perfil_url: dadosUser.html_url,
+            repositorios_publicos: dadosUser.public_repos,
+            seguidores: dadosUser.followers,
+            }
+            )
 
-        // Dispera um evento, contem as informações do segundo parâmetro.
-        dispatch('alterarUsuario', {
-        avatar_url: dadosUser.avatar_url,
-        login: dadosUser.login,
-        nome: dadosUser.name,
-        perfil_url: dadosUser.html_url,
-        repositorios_publicos: dadosUser.public_repos,
-        seguidores: dadosUser.followers,
+        } else {
+            statusDeErro = respostaUsuario.status
         }
-        )
+
        
   }
 </script>
 
 
 <form on:submit|preventDefault={submeter}>
-      <input type="text" class="input" bind:value={valorInput} />
+      <input type="text" class="input {statusDeErro == 404 && 'erro-input'}" bind:value={valorInput} />
+
+      {#if statusDeErro === 404}
+        <span class="erro"> Usuário não encontrado!</span>
+      {/if}
       <div class="botao-container">
         <button type="submit" class="botao">Buscar</button>
       </div>
@@ -82,5 +92,22 @@
 
 .botao:hover {
     background: #4590ff;
+  }
+
+  .erro {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    z-index: -1;
+    color: #ff003e;
+  }
+
+  .erro-input {
+    border: 1px solid  #ff003e;
+
   }
 </style>
