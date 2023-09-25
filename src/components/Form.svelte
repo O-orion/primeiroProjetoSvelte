@@ -3,7 +3,7 @@
   import { createEventDispatcher } from "svelte";
   import type IUsuario from "../interfaces/IUsuario";
 
-    const dispatch = createEventDispatcher()
+    const dispatch = createEventDispatcher<{alterarUsuario: IUsuario}>()
     let valorInput = "";
    // export let usuario: IUsuario | null
 
