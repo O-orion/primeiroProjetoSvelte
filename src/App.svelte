@@ -7,18 +7,18 @@
   let usuario: IUsuario  | null = null;
 
   async function submeter() {
-    usuario = {
-      avatar_url: "https://github.com/O-orion.png",
-      login: "Lucas Viana",
-      nome: "Lucas Viana Torres",
-      perfil_url: "https://github.com/O-orion",
-      repositorios_publicos: 50,
-      seguidores: 0,
-    };
     console.log(valorInput)
     const respostaUsuario = await fetch(`https://api.github.com/users/${valorInput}`);
     const dadosUser = await respostaUsuario.json() // transformando resposta em um json.
     console.log(dadosUser)
+    usuario = {
+      avatar_url: dadosUser.avatar_url,
+      login: dadosUser.login,
+      nome: dadosUser.name,
+      perfil_url: dadosUser.html_url,
+      repositorios_publicos: dadosUser.public_repos,
+      seguidores: dadosUser.followers,
+    };
   }
   /*let usuario: IUsuario = {
     avatar_url: 'https://github.com/O-orion.png',
