@@ -6,7 +6,7 @@ import Titulo from "./components/Titulo.svelte";
   import type IUsuario from "./interfaces/IUsuario";
 
   let usuario: IUsuario  | null = null;
-  function definirUsuario(event: CustomEvent) {
+  function definirUsuario(event: CustomEvent<IUsuario>) {
   console.log(usuario)
   usuario = event.detail
   }
