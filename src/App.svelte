@@ -1,68 +1,85 @@
 <script lang="ts">
   import BarraSuperior from "./components/BarraSuperior.svelte";
-import Titulo from "./components/Titulo.svelte";
-  let valorInput = ""
+  import Titulo from "./components/Titulo.svelte";
+  import type IUsuario from "./interfaces/IUsuario";
+  let valorInput = "";
+  let usuario: IUsuario = null;
   function submeter() {
-	console.log(valorInput)
-	console.log('OLá')
+    usuario = {
+      avatar_url: "https://github.com/O-orion.png",
+      login: "Lucas Viana",
+      nome: "Lucas Viana Torres",
+      perfil_url: "https://github.com/O-orion",
+      repositorios_publicos: 50,
+      seguidores: 0,
+    };
   }
-
-  let usuario = {}
-
+  /*let usuario: IUsuario = {
+    avatar_url: 'https://github.com/O-orion.png',
+    login: 'Lucas Viana',
+    nome: 'Lucas Viana Torres',
+    perfil_url: 'https://github.com/O-orion',
+    repositorios_publicos: 50,
+    seguidores: 0
+  } */
 </script>
 
-	<div class="app">
-		<header>
-			<Titulo></Titulo>
+<div class="app">
+  <header>
+    <Titulo />
 
-			<div class="busca-usuario">
-				<form on:submit|preventDefault={submeter} >
-					<input type="text" class="input" bind:value={valorInput}>
-					<div class="botao-container">
-						<button type="submit"  class="botao" >Buscar</button>
-					</div>
-				</form>
-			</div>
-		</header>
+    <div class="busca-usuario">
+      <form on:submit|preventDefault={submeter}>
+        <input type="text" class="input" bind:value={valorInput} />
+        <div class="botao-container">
+          <button type="submit" class="botao">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </header>
 
-    <BarraSuperior></BarraSuperior>
+  {#if usuario}
+    <BarraSuperior />
     <div class="usuario">
       <div class="foto-container">
-        <a href="https://github.com/Oorion" target="_blank" rel="noopener">
-          <div class="foto-usuario">
-          
-          </div>
+        <a href={usuario.perfil_url} target="_blank" rel="noopener">
+          <div
+            class="foto-usuario"
+            style="
+            background-image: url({usuario.avatar_url})
+          "
+          />
         </a>
       </div>
 
       <div class="detalhes-usuario">
-          <div class="info">
-            Nome: <span>Lucas Viana</span>
-          </div>
- 
-          <div class="info">
-              Usuário: <span>Oorion</span>
-          </div>
-           
-          <div class="info">
-                Seguidores: <span>30</span>
-          </div>
-             
-            <div class="info">
-                  Reposotórios: <span>20</span>
-            </div>
+        <div class="info">
+          Nome: <span>{usuario.nome}</span>
+        </div>
+
+        <div class="info">
+          Usuário: <span>{usuario.login}</span>
+        </div>
+
+        <div class="info">
+          Seguidores: <span>{usuario.seguidores}</span>
+        </div>
+
+        <div class="info">
+          Reposotórios: <span>{usuario.repositorios_publicos}</span>
         </div>
       </div>
- 
-	</div>
+    </div>
+  {/if}
+</div>
 
 <style>
-    .app {
+  .app {
     max-height: 100vh;
   }
 
-  header {    
-	margin-top: 2rem;
+  header {
+    margin-top: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -148,7 +165,6 @@ import Titulo from "./components/Titulo.svelte";
     border: 4.56px solid #2e80fa;
     border-radius: 50%;
     background-size: cover;
-    background-image: url('https://github.com/O-orion.png');
   }
 
   .detalhes-usuario {
