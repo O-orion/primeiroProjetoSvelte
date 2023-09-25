@@ -38,14 +38,23 @@
       Reposotórios: <span>{usuario.repositorios_publicos}</span>
     </div>
   </div>
+
+  {#if usuario.repositorios.length}
+    <div class="repositorios">
+      <h2 class="titulo">Repositórios Recentes</h2>
+      <ul>
+        {#each usuario.repositorios as repo} 
+          <li>
+            <a class="repositorio" href={repo.url} target="_blank" rel="noopener">{repo.nome}</a>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  {/if}
 </div>
 
 <style>
     /*  estilos do usuário  */
-
-  .card-usuario {
-    margin-top: 65px;
-  }
 
   .usuario {
     padding: 28px 0;
@@ -83,6 +92,19 @@
   .detalhes-usuario > .info > span {
     color: #6781a8;
     font-weight: normal;
+  }
+
+  .repositorios > .titulo {
+    font-size: 20px;
+    line-height: 31px;
+    font-weight: 600;
+    color: #395278;
+  }
+  .repositorio {
+    font-size: 20px;
+    line-height: 31px;
+    color: #6781a8;
+    transition: color 0.2s;
   }
 </style>
 

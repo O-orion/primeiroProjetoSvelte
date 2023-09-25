@@ -7,7 +7,7 @@
 
 
     const dispatch = createEventDispatcher<{alterarUsuario: IUsuario}>()
-    let valorInput = "";
+    let valorInput = "O-orion";
     // export let usuario: IUsuario | null
     let statusDeErro: null | number = null
 
