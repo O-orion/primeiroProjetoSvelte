@@ -5,7 +5,8 @@
   import type IUsuario from "./interfaces/IUsuario";
   let valorInput = "";
   let usuario: IUsuario  | null = null;
-  function submeter() {
+
+  async function submeter() {
     usuario = {
       avatar_url: "https://github.com/O-orion.png",
       login: "Lucas Viana",
@@ -14,6 +15,10 @@
       repositorios_publicos: 50,
       seguidores: 0,
     };
+    console.log(valorInput)
+    const respostaUsuario = await fetch(`https://api.github.com/users/${valorInput}`);
+    const dadosUser = await respostaUsuario.json() // transformando resposta em um json.
+    console.log(dadosUser)
   }
   /*let usuario: IUsuario = {
     avatar_url: 'https://github.com/O-orion.png',
