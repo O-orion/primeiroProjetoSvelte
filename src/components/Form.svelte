@@ -4,6 +4,7 @@
   import type IUsuario from "../interfaces/IUsuario";
   import { buscaRepositorio, buscarUsuario } from "../requisicoes";
   import montarUsuario from "../utils/montarUsuario";
+  import Botao from "./Botao.svelte";
 
 
     const dispatch = createEventDispatcher<{alterarUsuario: IUsuario}>()
@@ -43,7 +44,10 @@
         <span class="erro"> Usuário não encontrado!</span>
       {/if}
       <div class="botao-container">
-        <button type="submit" class="botao">Buscar</button>
+        <Botao>
+          Buscar
+          <img src="/assets/lupa.svg" alt="icone de lupa">
+        </Botao>
       </div>
 </form>
 
@@ -74,27 +78,6 @@
     top: 0;
     bottom: 0;
     display: flex;
-  }
-
-.botao {
-    padding: 15px 24px;
-    border-radius: 8px;
-    border: none;
-    background: #2e80fa;
-    line-height: 26px;
-    color: #fff;
-    font-size: 22px;
-    cursor: pointer;
-
-    transition: background-color 0.2s;
-
-    display: flex;
-    align-items: center;
-    gap: 13px;
-  }
-
-.botao:hover {
-    background: #4590ff;
   }
 
   .erro {
