@@ -1,10 +1,13 @@
 <script lang="ts">
-  import Titulo from "./components/Titulo.svelte";
+  import BarraSuperior from "./components/BarraSuperior.svelte";
+import Titulo from "./components/Titulo.svelte";
   let valorInput = ""
   function submeter() {
 	console.log(valorInput)
 	console.log('OLá')
   }
+
+  let usuario = {}
 
 </script>
 
@@ -21,6 +24,36 @@
 				</form>
 			</div>
 		</header>
+
+    <BarraSuperior></BarraSuperior>
+    <div class="usuario">
+      <div class="foto-container">
+        <a href="https://github.com/Oorion" target="_blank" rel="noopener">
+          <div class="foto-usuario">
+          
+          </div>
+        </a>
+      </div>
+
+      <div class="detalhes-usuario">
+          <div class="info">
+            Nome: <span>Lucas Viana</span>
+          </div>
+ 
+          <div class="info">
+              Usuário: <span>Oorion</span>
+          </div>
+           
+          <div class="info">
+                Seguidores: <span>30</span>
+          </div>
+             
+            <div class="info">
+                  Reposotórios: <span>20</span>
+            </div>
+        </div>
+      </div>
+ 
 	</div>
 
 <style>
@@ -89,4 +122,48 @@
     background: #4590ff;
   }
 
+  /*  estilos do usuário  */
+
+  .card-usuario {
+    margin-top: 65px;
+  }
+
+  .usuario {
+    padding: 28px 0;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: -12px 37px 45px rgba(133, 127, 201, 0.18);
+    border-radius: 0px 0px 13px 13px;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .foto-container {
+    margin-right: 81px;
+  }
+
+  .foto-usuario {
+    width: 12.75rem;
+    height: 12.75rem;
+    border: 4.56px solid #2e80fa;
+    border-radius: 50%;
+    background-size: cover;
+    background-image: url('https://github.com/O-orion.png');
+  }
+
+  .detalhes-usuario {
+    margin-right: 55px;
+  }
+
+  .detalhes-usuario > .info {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 31px;
+    color: #395278;
+  }
+
+  .detalhes-usuario > .info > span {
+    color: #6781a8;
+    font-weight: normal;
+  }
 </style>
