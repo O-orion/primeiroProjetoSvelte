@@ -20,7 +20,7 @@
 
   <div class="detalhes-usuario">
     
-    {#if usuario.nome}}
+    {#if usuario.nome}
     <div class="info">
       Nome: <span>{usuario.nome}</span>
     </div>
